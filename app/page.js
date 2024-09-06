@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import SignUp from '@/Components/SignUp'
+import SignUpBtn from '@/Components/SignUpBtn'
 
 const Page = () => {
   //all the states are defined here
@@ -80,10 +80,8 @@ const Page = () => {
         </div>
 
         <div className="nav-animation-2 flex items-center space-x-6">
-          <a href="#" >Home</a>
-          <a href="#" >About</a>
-          <a href="#" >Services</a>
-          <SignUp />
+        {['Home','About','Services'].map(ele=>{return <a href='#'>{ele}</a>})}
+          <SignUpBtn />
           <button onClick={toggleDarkMode} className="px-3 py-1 rounded-full hover:border-0 hover:brightness-150" style={{
             backgroundColor: isDarkMode ? '#FFA500' : '#4A4A4A'
           }}>
@@ -197,7 +195,7 @@ const Page = () => {
         <section className='cta-section'>
           <p className='text-[3vw]'>Start Your Learning Journey Today</p>
           <p>Join our platform and access a widde range of courses and resources.</p>
-          <SignUp />
+          <SignUpBtn />
         </section>
 
         {/* newsletter section */}
