@@ -49,6 +49,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-weight: 600;
+  
 }
 
 nav {
@@ -82,6 +83,15 @@ button {
 .btn-style-two {
   border: 2px solid var(--highlight-color);
   background-color: var(--highlight-color);
+}
+
+.marquee{
+  display: flex;
+  text-wrap: nowrap;
+  position: absolute;
+  bottom: 0;
+  font-size: 8vw;
+  transform: translateX(-100%);
 }
 
 .sub-section {

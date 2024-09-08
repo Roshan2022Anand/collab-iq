@@ -47,6 +47,20 @@ const Page = () => {
       duration: 0.5,
       stagger: 0.2
     }
+    const lrScrollTriggerAnimation = (cls) => {
+      return {
+        x: "-100%",
+        opacity: 0,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: cls,
+          scroller: "body",
+          start: "top 85%",
+          end: "top 85%",
+          scrub: 5
+        }
+      }
+    }
     navTl.from(".nav-animation-1", tbAnimation)
     navTl.from(".nav-animation-2 > *", tbAnimation)
     navTl.from(".hero-animation-1 > *", lrAnimation)
@@ -54,6 +68,7 @@ const Page = () => {
     navTl.from(".hero-animation-3 > *", tbAnimation)
 
     //gsap animation for feature section
+    gsap.from(".feature-animation-1", lrScrollTriggerAnimation(".feature-animation-1"));
     gsap.from(".feature-animation-2", {
       height: "20%",
       opacity: 0,
@@ -66,8 +81,43 @@ const Page = () => {
         scrub: 2
       }
     })
+
+    //gsap animation for CTA section
+    gsap.from(".cta-animation-1", lrScrollTriggerAnimation(".cta-animation-1"));
   }, [])
 
+  //animation for nav bar and marquee
+  useEffect(() => {
+    const moveNav = (info) => {
+      if (info.deltaY > 0) {
+        gsap.to("nav", {
+          y: -100
+        })
+        gsap.to(".marquee", {
+          transform: "translateX(0%)",
+          duration: 2,
+          repeat: -1,
+          ease: "none"
+        })
+      } else {
+        gsap.to("nav", {
+          y: 0
+        })
+        gsap.to(".marquee", {
+          transform: "translateX(-200%)",
+          duration: 2,
+          repeat: -1
+        })
+      }
+    }
+    window.addEventListener("wheel", moveNav);
+    return () => {
+      window.removeEventListener("wheel", moveNav);
+    }
+  }, [])
+  let arr = []
+  for (let i = 0; i < 4; i++)
+    arr.push('Together We Learn, Together We Grow.');
   //  Together We Learn, Together We Grow.
   // Where Learning Meets Collaboration.
   return (
@@ -110,13 +160,16 @@ const Page = () => {
             <img src="/login-pg-imgs/bg-img.jpg" className='h-full w-full p-2 rounded-3xl' />
           </div>
         </section>
+        <div className='marquee'>
+          {arr.map((ele) => { return <p>{ele}</p> })}
+        </div>
         <AnimatedLine />
         {/* features section */}
-        <section className='sub-section p-2 max-w-[1300px] mx-auto'>
+        <section className='sub-section p-2 max-w-[1400px] mx-auto max-h-[700px]'>
           <header className='flex justify-evenly p-3 h-1/2'>
-            <p className='text-[4vw] w-2/3 '>Experience Real-Time Collaboration with Other Students</p>
+            <p className='text-[4vw] w-2/3 feature-animation-1'>Experience Real-Time Collaboration with Other Students</p>
             <div className='w-1/2 h-full flex flex-col justify-end'>
-              <p className='feature-animation-1 text-[1.2vw]'>Our platform allows you to collaborate with other students in real-time, making learning more interactive and engaging. Share ideas, work on projects together, and learn from each other's perspectives.</p>
+              <p className='text-[1.2vw]'>Our platform allows you to collaborate with other students in real-time, making learning more interactive and engaging. Share ideas, work on projects together, and learn from each other's perspectives.</p>
               <div className='feature-animation-2 h-[75%]'>animation info</div>
             </div>
           </header>
@@ -192,8 +245,8 @@ const Page = () => {
 
         {/* CTA section */}
         <section className='cta-section'>
-          <p className='text-[3vw]'>Start Your Learning Journey Today</p>
-          <p>Join our platform and access a widde range of courses and resources.</p>
+          <p className='text-[3vw] cta-animation-1'>Start Your Learning Journey Today</p>
+          <p className='cta-animation-1'>Join our platform and access a widde range of courses and resources.</p>
           <SignUpBtn />
         </section>
 
