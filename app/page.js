@@ -1,13 +1,14 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SignUpBtn from '@/Components/SignUpBtn'
+import AnimatedLine from '@/Components/AnimatedLine'
+import { MyContext } from '@/Components/Mycontext'
 
 const Page = () => {
-  //all the states are defined here
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const { isDarkMode, setIsDarkMode } = useContext(MyContext);
 
   //function to toggle dark mode
   const toggleDarkMode = () => {
@@ -29,7 +30,6 @@ const Page = () => {
       document.documentElement.style.setProperty('--opacity-bg-color', 'rgba(255, 255, 255, 0.3)');
     }
   }
-
   //All gsap animation 
   gsap.registerPlugin(ScrollTrigger);
   useGSAP(() => {
@@ -80,7 +80,7 @@ const Page = () => {
         </div>
 
         <div className="nav-animation-2 flex items-center space-x-6">
-        {['Home','About','Services'].map(ele=>{return <a href='#'>{ele}</a>})}
+          {['Home', 'About', 'Services'].map(ele => { return <a href='#'>{ele}</a> })}
           <SignUpBtn />
           <button onClick={toggleDarkMode} className="px-3 py-1 rounded-full hover:border-0 hover:brightness-150" style={{
             backgroundColor: isDarkMode ? '#FFA500' : '#4A4A4A'
@@ -93,26 +93,24 @@ const Page = () => {
       <main>
 
         {/* hero section */}
-        <section className="flex items-center h-screen text-[var(--text-color)] bg-no-repeat"
-          style={{
-            background: "linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3)), url('/login-pg-imgs/bg-img.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}>
+        <section className="flex items-center justify-around h-screen text-[var(--text-color)]">
           <div className="h-fit w-1/2 flex flex-col items-start pl-4">
-            <div className="hero-animation-1 text-[5vw] font-bold mb-4 text-white">
+            <div className="hero-animation-1 text-[5vw] font-bold mb-4">
               <p>Welcome to our </p>
               <p>Collaborative</p>
               <p>Learning Platform!</p>
             </div>
-            <p className="hero-animation-2 text-[2vw] mb-6 text-white">Discover a world of knowledge and enhance your learning experience</p>
+            <p className="hero-animation-2 text-[2vw] mb-6">Discover a world of knowledge and enhance your learning experience</p>
             <div className="hero-animation-3 flex space-x-4">
               <button className='btn-style-two text-[2vw]'>Explore</button>
               <button className='btn-style-one text-[2vw]'>Sign Up</button>
             </div>
           </div>
+          <div className='hero-animation-2 w-1/2 max-w-[600px] h-1/2'>
+            <img src="/login-pg-imgs/bg-img.jpg" className='h-full w-full p-2 rounded-3xl' />
+          </div>
         </section>
-
+        <AnimatedLine />
         {/* features section */}
         <section className='sub-section p-2 max-w-[1300px] mx-auto'>
           <header className='flex justify-evenly p-3 h-1/2'>
@@ -159,6 +157,7 @@ const Page = () => {
           </div>
         </section>
 
+        <AnimatedLine />
         {/* how its work section */}
         <section className='sub-section'>
           <header className='flex flex-col text-center text-[1vw] w-2/3 mx-auto'>
@@ -198,6 +197,7 @@ const Page = () => {
           <SignUpBtn />
         </section>
 
+        <AnimatedLine />
         {/* newsletter section */}
         <section className='newsletter-section'>
           <div className='text-[3vw] w-1/2'>Stay Updated with Our newsletter</div>
