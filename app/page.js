@@ -6,30 +6,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SignUpBtn from '@/Components/SignUpBtn'
 import AnimatedLine from '@/Components/AnimatedLine'
 import { MyContext } from '@/Components/Mycontext'
-
+import Nav from '@/Components/Nav'
 const Page = () => {
-  const { isDarkMode, setIsDarkMode } = useContext(MyContext);
 
-  //function to toggle dark mode
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode)
-    if (isDarkMode) {
-      document.documentElement.style.setProperty('--bg-color', '#1E1E1E');
-      document.documentElement.style.setProperty('--highlight-color', '#FF6F20');
-      document.documentElement.style.setProperty('--text-color', '#F5F5F5');
-      document.documentElement.style.setProperty('--hover-color', '#FFA500');
-      document.documentElement.style.setProperty('--secondary-bg-color', '#4A4A4A');
-      document.documentElement.style.setProperty('--opacity-bg-color', 'rgba(30, 30, 30, 0.6)');
-    }
-    else {
-      document.documentElement.style.setProperty('--bg-color', '#FFFFFF');
-      document.documentElement.style.setProperty('--highlight-color', '#FF6F20');
-      document.documentElement.style.setProperty('--text-color', '#333333');
-      document.documentElement.style.setProperty('--hover-color', '#FFF3E0');
-      document.documentElement.style.setProperty('--secondary-bg-color', '#7D7D7D');
-      document.documentElement.style.setProperty('--opacity-bg-color', 'rgba(255, 255, 255, 0.3)');
-    }
-  }
+
   //All gsap animation 
   gsap.registerPlugin(ScrollTrigger);
   useGSAP(() => {
@@ -39,13 +19,13 @@ const Page = () => {
       y: -30,
       opacity: 0,
       duration: 0.5,
-      stagger: 0.2
+      stagger: 0.3
     }
     let lrAnimation = {
       x: "-100%",
       opacity: 0,
       duration: 0.5,
-      stagger: 0.2
+      stagger: 0.5
     }
     const lrScrollTriggerAnimation = (cls) => {
       return {
@@ -61,8 +41,8 @@ const Page = () => {
         }
       }
     }
-    navTl.from(".nav-animation-1", tbAnimation)
-    navTl.from(".nav-animation-2 > *", tbAnimation)
+    navTl.from(".nav-animation-1",tbAnimation);
+    navTl.from(".nav-animation-2 > *", tbAnimation);
     navTl.from(".hero-animation-1 > *", lrAnimation)
     navTl.from(".hero-animation-2", tbAnimation)
     navTl.from(".hero-animation-3 > *", tbAnimation)
@@ -90,23 +70,24 @@ const Page = () => {
   useEffect(() => {
     const moveNav = (info) => {
       if (info.deltaY > 0) {
-        gsap.to("nav", {
+        gsap.to(".nav", {
           y: -100
         })
-        gsap.to(".marquee", {
-          transform: "translateX(0%)",
-          duration: 2,
+        gsap.to(".marquee-ele", {
+          transform: "translateX(10%)",
+          duration: 8,
           repeat: -1,
           ease: "none"
         })
       } else {
-        gsap.to("nav", {
+        gsap.to(".nav", {
           y: 0
         })
-        gsap.to(".marquee", {
+        gsap.to(".marquee-ele", {
           transform: "translateX(-200%)",
-          duration: 2,
-          repeat: -1
+          duration: 8,
+          repeat: -1,
+          ease: "none"
         })
       }
     }
@@ -123,23 +104,7 @@ const Page = () => {
   return (
     <>
       {/* navbar element */}
-      <nav>
-        {/* webisite logo */}
-        <div className="flex items-center ">
-          <img src="\login-pg-imgs\logo.png" alt="Logo" className="nav-animation-1 h-8 w-auto " />
-        </div>
-
-        <div className="nav-animation-2 flex items-center space-x-6">
-          {['Home', 'About', 'Services'].map(ele => { return <a href='#'>{ele}</a> })}
-          <SignUpBtn />
-          <button onClick={toggleDarkMode} className="px-3 py-1 rounded-full hover:border-0 hover:brightness-150" style={{
-            backgroundColor: isDarkMode ? '#FFA500' : '#4A4A4A'
-          }}>
-            {isDarkMode ? '☀️' : '🌙'}
-          </button>
-        </div>
-      </nav>
-
+      <Nav />
       <main>
 
         {/* hero section */}
@@ -156,16 +121,16 @@ const Page = () => {
               <button className='btn-style-one text-[2vw]'>Sign Up</button>
             </div>
           </div>
-          <div className='hero-animation-2 w-1/2 max-w-[600px] h-1/2'>
+          <div className='hero-animation-2 w-1/2 max-w-[550px] h-1/2'>
             <img src="/login-pg-imgs/bg-img.jpg" className='h-full w-full p-2 rounded-3xl' />
           </div>
         </section>
         <div className='marquee'>
-          {arr.map((ele) => { return <p>{ele}</p> })}
+          {arr.map((ele) => { return <p className='marquee-ele -translate-x-full'>{ele}</p> })}
         </div>
         <AnimatedLine />
         {/* features section */}
-        <section className='sub-section p-2 max-w-[1400px] mx-auto max-h-[700px]'>
+        <section id='Features' className='sub-section p-2 max-w-[1400px] mx-auto max-h-[700px]'>
           <header className='flex justify-evenly p-3 h-1/2'>
             <p className='text-[4vw] w-2/3 feature-animation-1'>Experience Real-Time Collaboration with Other Students</p>
             <div className='w-1/2 h-full flex flex-col justify-end'>
@@ -210,6 +175,7 @@ const Page = () => {
           </div>
         </section>
 
+
         <AnimatedLine />
         {/* how its work section */}
         <section className='sub-section'>
@@ -240,7 +206,7 @@ const Page = () => {
         </section>
 
         {/* testimonial section */}
-        <section>
+        <section id='Reviews'>
         </section>
 
         {/* CTA section */}
@@ -265,7 +231,7 @@ const Page = () => {
         </section>
       </main>
 
-      <footer>
+      <footer id='About'>
         <div className="flex items-center">
           <img src="\login-pg-imgs\logo.png" alt="Logo" className="h-8 w-auto" />
         </div>

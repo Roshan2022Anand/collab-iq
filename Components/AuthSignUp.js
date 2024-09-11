@@ -4,13 +4,13 @@ import Loader from "./Loader"
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import { MyContext } from "./Mycontext"
+
 export default function Component() {
-
     const { data: session, status } = useSession()
-    const { setNewUser, setuserEmail,router } = useContext(MyContext);
-    const [showNewUserModal, setShowNewUserModal] = useState(false);
+    const { setNewUser, setuserEmail, router } = useContext(MyContext);
+    const [showExistingUserModal, setShowExistingUserModal] = useState(false);
 
-    //funtion to check if the user is new or not
+    //function to check if the user is new or not
     const checkUser = async () => {
         try {
             const res = await axios.post("/api/checkEmail", { email: session.user.email })
@@ -19,42 +19,44 @@ export default function Component() {
             //if user already exists 
             if (res.data.exists) {
                 setNewUser(false)
-                router.push("/mainPg/Home")
+                setShowExistingUserModal(true)
             }
             //if user is new
             else {
                 setNewUser(true)
-                setShowNewUserModal(true)
+                router.push("/mainPg/onboarding")
             }
-        } catch (error) {
-            console.log("error occured")
         }
-
+        catch (error) {
+            console.log("error occurred")
+        }
     }
+
+    useEffect(() => {
+        if (session) {
+            console.log("session formed")
+            setuserEmail(session.user.email);
+            checkUser()
+        }
+    }, [session])
 
     if (status === "loading") return <Loader /> // or a loading spinner
 
-    if (session) {
-        console.log("session fromed")
-        setuserEmail(session.user.email);
-        checkUser()
-    }
-
     return (
         <div className="flex flex-col">
-            {showNewUserModal && (
+            {showExistingUserModal && (
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                     <div className="bg-white rounded-lg p-8 max-w-sm w-full shadow-lg">
                         <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Oops!</h2>
                         <p className="text-center text-gray-600 mb-6">
-                            it seems like you are not a member of colearn.
+                            It looks like you already have an account with us.
                         </p>
                         <div className="flex justify-center">
                             <button
-                                onClick={() => router.push('/SignUpPg')}
+                                onClick={() => router.push('/LoginPg')}
                                 className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             >
-                                Go to signup
+                                Go to Login
                             </button>
                         </div>
                     </div>

@@ -14,7 +14,7 @@ const page = () => {
     try {
       const res = await axios.post("/api/AddUser", { userName, userAge, userQualification, userField, userEmail })
       console.log(res.data)
-      router.push("/Home")
+      router.push("/mainPg/Home")
     } catch (error) {
       console.log(error)
     }

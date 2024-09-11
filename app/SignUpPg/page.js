@@ -1,5 +1,5 @@
 import React from 'react'
-import AuthLogin from '@/Components/AuthLogin'
+import AuthSignUp from '@/Components/AuthSignUp'
 const page = () => {
     return (
         <>
@@ -10,7 +10,7 @@ const page = () => {
                         <h1>COLEARN</h1>
                     </div>
                     <p>Join colearn for free</p>
-                    <AuthLogin />
+                    <AuthSignUp />
                     <fieldset className="text-center border-t-2 w-full">
                         <legend className="text-sm text-gray-500 px-2">Or sign up with Email</legend>
                     </fieldset>

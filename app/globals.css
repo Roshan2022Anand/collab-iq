@@ -13,8 +13,8 @@
   /** quote font*/
   --nav-font: "Open Sans", sans-serif;
   /** nav font*/
- 
-  --bg-color:#1E1E1E;
+
+  --bg-color: #1E1E1E;
   /**overall bg color*/
   --highlight-color: #FF6F20;
   /**btn imp ele*/
@@ -49,10 +49,10 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-weight: 600;
-  
+  scroll-behavior: smooth;
 }
 
-nav {
+.nav {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -66,6 +66,28 @@ nav {
   z-index: 100;
 }
 
+.mobile-nav {
+  width: 40vw;
+  background-color:#4a4a4ade;
+  backdrop-filter: blur(20px);
+  padding: 10px 30px;
+  border-bottom-left-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: fixed;
+  top: 0;
+  right: -50%;
+  z-index: 100;
+  font-size: 5vw;
+  opacity: 0;
+}
+.mobile-nav a{
+  text-align: center;
+  &:hover{
+    color: var(--highlight-color);
+  }
+}
 button {
   border-radius: 5px;
   padding: 2px;
@@ -85,13 +107,15 @@ button {
   background-color: var(--highlight-color);
 }
 
-.marquee{
+.marquee {
   display: flex;
   text-wrap: nowrap;
-  position: absolute;
-  bottom: 0;
   font-size: 8vw;
-  transform: translateX(-100%);
+  background-color: var(--highlight-color);
+  width: 90vw;
+  overflow-x: hidden;
+  border-radius: 50px;
+  margin: 0 auto;
 }
 
 .sub-section {
