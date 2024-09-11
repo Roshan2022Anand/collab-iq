@@ -9,7 +9,7 @@ const merriweather = Merriweather({ subsets: ["latin"], weight: ["400", "700"] }
 const openSans = Open_Sans({ subsets: ["latin"], weight: ["400", "600"] });
 
 export const metadata = {
-  title: "Collaborative Learning Platform",
+  title: "CollabIQ",
   description: "A platform for collaborative learning and peer interaction.",
 };
 
