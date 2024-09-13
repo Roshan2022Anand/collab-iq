@@ -1,10 +1,12 @@
+"use client"
 import React from 'react'
 import AuthSignUp from '@/Components/AuthSignUp'
+import styles from "@/app/(authPg)/authPg.module.css"
 const page = () => {
     return (
         <>
-            <main className='w-full h-screen flex items-center justify-center'>
-                <div className='flex flex-col items-center justify-evenly h-2/3 w-2/3 max-w-[700px] border-2 rounded-2xl p-10'>
+            <main className={styles.main}>
+                <div>
                     <div>
                         <img />
                         <h1>COLEARN</h1>

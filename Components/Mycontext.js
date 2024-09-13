@@ -9,10 +9,12 @@ const Mycontext = ({children}) => {
   const [newUser, setNewUser] = useState();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [userEmail, setuserEmail] = useState(null);
+  const [userData, setUserData] = useState(null)
+  const [userStats, setUserStats] = useState(null)
   const isMobileScreen = useMediaQuery({ query: '(max-width:600px)' });
   
   return (
-    <MyContext.Provider value={{ newUser, setNewUser, isDarkMode, setIsDarkMode, userEmail, setuserEmail,router,isMobileScreen }}>
+    <MyContext.Provider value={{ newUser, setNewUser, isDarkMode, setIsDarkMode, userEmail, setuserEmail,router,isMobileScreen,userData,setUserData,userStats,setUserStats }}>
         {children}
     </MyContext.Provider>
   )

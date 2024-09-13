@@ -6,7 +6,7 @@ export async function middleware(request) {
 
     // Check if the user is trying to access the mainPg route
     if (request.nextUrl.pathname.startsWith('/mainPg')) {
-        // If there's no token, redirect to the login page
+        // If there's no token, redirect to the login page);
         if (!token) {
             return NextResponse.redirect(new URL('/', request.url))
         }

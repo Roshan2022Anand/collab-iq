@@ -4,11 +4,18 @@ import User from '@/model/user';
 import Stats from '@/model/stats';
 
 export async function POST(request) {
+    console.log("post request done");
+    
     try {
         // Connect to the database
         await connectDB();
 
         const { userName, userAge, userQualification, userField, userEmail } = await request.json();
+        // if (userEmail) {
+        //     return NextResponse.json({ message: 'Email already exists. Please use a different email.' });
+        // }
+
+        console.log(userName, userAge, userQualification, userField, userEmail);
         //adding user basic details to DB
         const newUser = new User({
             name: userName,
@@ -16,6 +23,7 @@ export async function POST(request) {
             age: userAge,
             qualification: userQualification,
             field: userField,
+            bio: "..",
             createdAt: new Date()
         });
         await newUser.save();
@@ -26,6 +34,8 @@ export async function POST(request) {
 
         return NextResponse.json({ message: "User added successfully" }, { status: 200 });
     } catch (error) {
+        console.log("error in AddUser", error);
+        
         return NextResponse.json({ message: "Error adding user" }, { status: 500 });
     }
 }

@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import AuthLogin from '@/Components/AuthLogin'
 const page = () => {

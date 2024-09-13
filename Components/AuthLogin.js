@@ -32,7 +32,7 @@ export default function Component() {
 
     }
 
-    if (status === "loading") return <Loader /> // or a loading spinner
+    if (status === "loading") return <Loader />  // or a loading spinner
 
     if (session) {
         console.log("session fromed")

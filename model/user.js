@@ -26,11 +26,17 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Field is required'],
     },
+    bio:{
+        type: String,
+        required: [true, 'Bio is required'],
+    },
     createdAt: {
         type: Date,
         default: Date.now
     }
 },{strict:false});
+
+console.log(mongoose.models);
 
 // Export the User model, or use the existing one if it already exists
 export default mongoose.models.User || mongoose.model("User", UserSchema);
