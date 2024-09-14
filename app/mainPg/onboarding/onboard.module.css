@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-.container{
-=======
 .container {
->>>>>>> subBranchOne
     width: 70%;
     margin: 0 auto;
     display: flex;
@@ -10,20 +6,6 @@
     align-items: center;
     justify-content: center;
 }
-<<<<<<< HEAD
-.container input,.container select{
-    background-color: transparent;
-    border-radius: 10px;
-    border:1px solid white;
-    color:white;
-    padding:10px;
-    width:100%;
-}
-.container option{
-    background-color: var(--bg-color);
-    color:white;
-=======
-
 .container input,
 .container select {
     background-color: transparent;
@@ -37,5 +19,4 @@
 .container option {
     background-color: var(--bg-color);
     color: white;
->>>>>>> subBranchOne
 }

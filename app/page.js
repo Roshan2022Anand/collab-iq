@@ -3,11 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-<<<<<<< HEAD
-import SignUpBtn from '@/Components/SignUpBtn'
-=======
 import SignUpBtn from '@/Components/signup-components/SignUpBtn'
->>>>>>> subBranchOne
 import AnimatedLine from '@/Components/AnimatedLine'
 import { MyContext } from '@/Components/Mycontext'
 import Nav from '@/Components/Nav'
@@ -45,11 +41,7 @@ const Page = () => {
         }
       }
     }
-<<<<<<< HEAD
-    navTl.from(".nav-animation-1",tbAnimation);
-=======
     navTl.from(".nav-animation-1", tbAnimation);
->>>>>>> subBranchOne
     navTl.from(".nav-animation-2 > *", tbAnimation);
     navTl.from(".hero-animation-1 > *", lrAnimation)
     navTl.from(".hero-animation-2", tbAnimation)

@@ -11,17 +11,9 @@ export async function POST(request) {
         await connectDB();
 
         const { userName, userAge, userQualification, userField, userEmail } = await request.json();
-<<<<<<< HEAD
-        // if (userEmail) {
-        //     return NextResponse.json({ message: 'Email already exists. Please use a different email.' });
-        // }
-
-        console.log(userName, userAge, userQualification, userField, userEmail);
-=======
         if (userEmail) {
             return NextResponse.json({ message: 'Email already exists. Please use a different email.' });
         }
->>>>>>> subBranchOne
         //adding user basic details to DB
         const newUser = new User({
             name: userName,

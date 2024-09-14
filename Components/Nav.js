@@ -1,10 +1,6 @@
 "use client"
 import React, { useContext, useState, useEffect, useRef } from 'react'
-<<<<<<< HEAD
-import SignUpBtn from '@/Components/SignUpBtn'
-=======
 import SignUpBtn from '@/Components/signup-components/SignUpBtn'
->>>>>>> subBranchOne
 import { MyContext } from './Mycontext';
 import { useGSAP } from '@gsap/react';
 import { TiThMenu } from "react-icons/ti";
@@ -37,12 +33,7 @@ const Nav = () => {
     //function to open the nav bar
     let navTlRef;
     navTlRef = gsap.timeline();
-
-<<<<<<< HEAD
-        navTlRef.pause();
-=======
     navTlRef.pause();
->>>>>>> subBranchOne
     // if (!isMounted)
     //     return null
 
@@ -50,13 +41,8 @@ const Nav = () => {
     const openSetting = () => {
         console.log("open");
         navTlRef.play();
-<<<<<<< HEAD
-        navTlRef.to('.mobile-nav', { right: "0%",opacity:1, duration: 0.5 });
-        navTlRef.from('.mobile-nav *', { x:250,opacity:0, duration: 1,stagger:0.2 });
-=======
         navTlRef.to('.mobile-nav', { right: "0%", opacity: 1, duration: 0.5 });
         navTlRef.from('.mobile-nav *', { x: 250, opacity: 0, duration: 1, stagger: 0.2 });
->>>>>>> subBranchOne
     }
     const closeSetting = () => {
         navTlRef.reverse();
@@ -70,11 +56,7 @@ const Nav = () => {
             </div>
             {(isMobileScreen) ?
                 <div>
-<<<<<<< HEAD
-                    <button onClick={openSetting}><TiThMenu/></button>
-=======
                     <button onClick={openSetting}><TiThMenu /></button>
->>>>>>> subBranchOne
                     <div className='mobile-nav'>
                         <div className='flex justify-between'>
                             <button onClick={toggleDarkMode} className="w-1/2 px-3 py-1 rounded-full hover:border-0 hover:brightness-150" style={{

@@ -9,11 +9,7 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, 'Email is required'],
-<<<<<<< HEAD
         unique: true,
-=======
-        unique: false,
->>>>>>> subBranchOne
         trim: true,
         lowercase: true,
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
