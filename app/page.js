@@ -96,6 +96,7 @@ const Page = () => {
       window.removeEventListener("wheel", moveNav);
     }
   }, [])
+  
   let arr = []
   for (let i = 0; i < 4; i++)
     arr.push('Together We Learn, Together We Grow.');
