@@ -1,6 +1,10 @@
 "use client"
 import React from 'react'
+<<<<<<< HEAD
 import AuthSignUp from '@/Components/AuthSignUp'
+=======
+import AuthSignUp from '@/Components/signup-components/AuthSignUp'
+>>>>>>> subBranchOne
 import styles from "@/app/(authPg)/authPg.module.css"
 const page = () => {
     return (

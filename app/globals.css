@@ -68,7 +68,11 @@ body {
 
 .mobile-nav {
   width: 40vw;
+<<<<<<< HEAD
   background-color:#4a4a4ade;
+=======
+  background-color: #4a4a4ade;
+>>>>>>> subBranchOne
   backdrop-filter: blur(20px);
   padding: 10px 30px;
   border-bottom-left-radius: 20px;
@@ -82,12 +86,24 @@ body {
   font-size: 5vw;
   opacity: 0;
 }
+<<<<<<< HEAD
 .mobile-nav a{
   text-align: center;
   &:hover{
     color: var(--highlight-color);
   }
 }
+=======
+
+.mobile-nav a {
+  text-align: center;
+
+  &:hover {
+    color: var(--highlight-color);
+  }
+}
+
+>>>>>>> subBranchOne
 button {
   border-radius: 5px;
   padding: 2px;
@@ -116,9 +132,14 @@ button {
   overflow-x: hidden;
   border-radius: 50px;
   margin: 0 auto;
+<<<<<<< HEAD
   
 }
 
+=======
+
+}
+>>>>>>> subBranchOne
 .sub-section {
   display: flex;
   flex-direction: column;

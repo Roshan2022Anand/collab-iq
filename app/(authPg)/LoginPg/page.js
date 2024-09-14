@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import AuthLogin from '@/Components/AuthLogin'
+import AuthLogin from '@/Components/signup-components/AuthLogin'
 const page = () => {
     return (
         <main className='w-full h-screen flex items-center justify-center'>
