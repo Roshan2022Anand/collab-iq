@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { useRouter } from 'next/navigation'
-import { MyContext } from './Mycontext';
+import { MyContext } from '../Mycontext';
+
 const SignUp = () => {
   const router = useRouter();
   const {isMobileScreen} = useContext(MyContext);
