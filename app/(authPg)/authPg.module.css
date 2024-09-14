@@ -1,0 +1,30 @@
+.main {
+background:
+        radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #ff6f20 68% 70%, #0000 72%) 100px 100px/calc(2*100px) calc(2*100px),
+        radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #ff6f20 68% 70%, #0000 72%) 100px 100px/calc(2*100px) calc(2*100px),
+        radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #ff6f20 68% 70%, #0000 72%) 0 0/calc(2*100px) calc(2*100px),
+        radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #ff6f20 68% 70%, #0000 72%) 0 0/calc(2*100px) calc(2*100px),
+        repeating-conic-gradient(#1e1e1e 0 25%, #0000 0 50%) 0 0/calc(2*100px) calc(2*100px),
+        radial-gradient(#0000 66%, #ff6f20 68% 70%, #0000 72%) 0 calc(100px/2)/100px 100px #1e1e1e;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main>div {
+    height: 60%;
+    width: 50%;
+    max-width: 700px;
+    background-color: rgba(0, 0, 0, 0.389);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--highlight-color);
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px var(--highlight-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}

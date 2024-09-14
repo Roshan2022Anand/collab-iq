@@ -1,34 +1,14 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import SignUpBtn from '@/Components/SignUpBtn'
-
+import SignUpBtn from '@/Components/signup-components/SignUpBtn'
+import AnimatedLine from '@/Components/AnimatedLine'
+import { MyContext } from '@/Components/Mycontext'
+import Nav from '@/Components/Nav'
 const Page = () => {
-  //all the states are defined here
-  const [isDarkMode, setIsDarkMode] = useState(false)
 
-  //function to toggle dark mode
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode)
-    if (isDarkMode) {
-      document.documentElement.style.setProperty('--bg-color', '#1E1E1E');
-      document.documentElement.style.setProperty('--highlight-color', '#FF6F20');
-      document.documentElement.style.setProperty('--text-color', '#F5F5F5');
-      document.documentElement.style.setProperty('--hover-color', '#FFA500');
-      document.documentElement.style.setProperty('--secondary-bg-color', '#4A4A4A');
-      document.documentElement.style.setProperty('--opacity-bg-color', 'rgba(30, 30, 30, 0.6)');
-    }
-    else {
-      document.documentElement.style.setProperty('--bg-color', '#FFFFFF');
-      document.documentElement.style.setProperty('--highlight-color', '#FF6F20');
-      document.documentElement.style.setProperty('--text-color', '#333333');
-      document.documentElement.style.setProperty('--hover-color', '#FFF3E0');
-      document.documentElement.style.setProperty('--secondary-bg-color', '#7D7D7D');
-      document.documentElement.style.setProperty('--opacity-bg-color', 'rgba(255, 255, 255, 0.3)');
-    }
-  }
 
   //All gsap animation 
   gsap.registerPlugin(ScrollTrigger);
@@ -39,21 +19,36 @@ const Page = () => {
       y: -30,
       opacity: 0,
       duration: 0.5,
-      stagger: 0.2
+      stagger: 0.3
     }
     let lrAnimation = {
       x: "-100%",
       opacity: 0,
       duration: 0.5,
-      stagger: 0.2
+      stagger: 0.5
     }
-    navTl.from(".nav-animation-1", tbAnimation)
-    navTl.from(".nav-animation-2 > *", tbAnimation)
+    const lrScrollTriggerAnimation = (cls) => {
+      return {
+        x: "-100%",
+        opacity: 0,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: cls,
+          scroller: "body",
+          start: "top 85%",
+          end: "top 85%",
+          scrub: 5
+        }
+      }
+    }
+    navTl.from(".nav-animation-1", tbAnimation);
+    navTl.from(".nav-animation-2 > *", tbAnimation);
     navTl.from(".hero-animation-1 > *", lrAnimation)
     navTl.from(".hero-animation-2", tbAnimation)
     navTl.from(".hero-animation-3 > *", tbAnimation)
 
     //gsap animation for feature section
+    gsap.from(".feature-animation-1", lrScrollTriggerAnimation(".feature-animation-1"));
     gsap.from(".feature-animation-2", {
       height: "20%",
       opacity: 0,
@@ -66,59 +61,80 @@ const Page = () => {
         scrub: 2
       }
     })
+
+    //gsap animation for CTA section
+    gsap.from(".cta-animation-1", lrScrollTriggerAnimation(".cta-animation-1"));
   }, [])
 
+  //animation for nav bar and marquee
+  useEffect(() => {
+    const moveNav = (info) => {
+      if (info.deltaY > 0) {
+        gsap.to(".nav", {
+          y: -100
+        })
+        gsap.to(".marquee-ele", {
+          transform: "translateX(10%)",
+          duration: 8,
+          repeat: -1,
+          ease: "none"
+        })
+      } else {
+        gsap.to(".nav", {
+          y: 0
+        })
+        gsap.to(".marquee-ele", {
+          transform: "translateX(-200%)",
+          duration: 8,
+          repeat: -1,
+          ease: "none"
+        })
+      }
+    }
+    window.addEventListener("wheel", moveNav);
+    return () => {
+      window.removeEventListener("wheel", moveNav);
+    }
+  }, [])
+  let arr = []
+  for (let i = 0; i < 4; i++)
+    arr.push('Together We Learn, Together We Grow.');
   //  Together We Learn, Together We Grow.
   // Where Learning Meets Collaboration.
   return (
     <>
       {/* navbar element */}
-      <nav>
-        {/* webisite logo */}
-        <div className="flex items-center ">
-          <img src="\login-pg-imgs\logo.png" alt="Logo" className="nav-animation-1 h-8 w-auto " />
-        </div>
-
-        <div className="nav-animation-2 flex items-center space-x-6">
-        {['Home','About','Services'].map(ele=>{return <a href='#'>{ele}</a>})}
-          <SignUpBtn />
-          <button onClick={toggleDarkMode} className="px-3 py-1 rounded-full hover:border-0 hover:brightness-150" style={{
-            backgroundColor: isDarkMode ? '#FFA500' : '#4A4A4A'
-          }}>
-            {isDarkMode ? '☀️' : '🌙'}
-          </button>
-        </div>
-      </nav>
-
+      <Nav />
       <main>
 
         {/* hero section */}
-        <section className="flex items-center h-screen text-[var(--text-color)] bg-no-repeat"
-          style={{
-            background: "linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3)), url('/login-pg-imgs/bg-img.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}>
+        <section className="flex items-center justify-around h-screen text-[var(--text-color)]">
           <div className="h-fit w-1/2 flex flex-col items-start pl-4">
-            <div className="hero-animation-1 text-[5vw] font-bold mb-4 text-white">
+            <div className="hero-animation-1 text-[5vw] font-bold mb-4">
               <p>Welcome to our </p>
               <p>Collaborative</p>
               <p>Learning Platform!</p>
             </div>
-            <p className="hero-animation-2 text-[2vw] mb-6 text-white">Discover a world of knowledge and enhance your learning experience</p>
+            <p className="hero-animation-2 text-[2vw] mb-6">Discover a world of knowledge and enhance your learning experience</p>
             <div className="hero-animation-3 flex space-x-4">
               <button className='btn-style-two text-[2vw]'>Explore</button>
               <button className='btn-style-one text-[2vw]'>Sign Up</button>
             </div>
           </div>
+          <div className='hero-animation-2 w-1/2 max-w-[550px] h-1/2'>
+            <img src="/login-pg-imgs/bg-img.jpg" className='h-full w-full p-2 rounded-3xl' />
+          </div>
         </section>
-
+        <div className='marquee'>
+          {arr.map((ele) => { return <p className='marquee-ele -translate-x-full'>{ele}</p> })}
+        </div>
+        <AnimatedLine />
         {/* features section */}
-        <section className='sub-section p-2 max-w-[1300px] mx-auto'>
+        <section id='Features' className='sub-section p-2 max-w-[1400px] mx-auto max-h-[700px]'>
           <header className='flex justify-evenly p-3 h-1/2'>
-            <p className='text-[4vw] w-2/3 '>Experience Real-Time Collaboration with Other Students</p>
+            <p className='text-[4vw] w-2/3 feature-animation-1'>Experience Real-Time Collaboration with Other Students</p>
             <div className='w-1/2 h-full flex flex-col justify-end'>
-              <p className='feature-animation-1 text-[1.2vw]'>Our platform allows you to collaborate with other students in real-time, making learning more interactive and engaging. Share ideas, work on projects together, and learn from each other's perspectives.</p>
+              <p className='text-[1.2vw]'>Our platform allows you to collaborate with other students in real-time, making learning more interactive and engaging. Share ideas, work on projects together, and learn from each other's perspectives.</p>
               <div className='feature-animation-2 h-[75%]'>animation info</div>
             </div>
           </header>
@@ -159,6 +175,8 @@ const Page = () => {
           </div>
         </section>
 
+
+        <AnimatedLine />
         {/* how its work section */}
         <section className='sub-section'>
           <header className='flex flex-col text-center text-[1vw] w-2/3 mx-auto'>
@@ -188,16 +206,17 @@ const Page = () => {
         </section>
 
         {/* testimonial section */}
-        <section>
+        <section id='Reviews'>
         </section>
 
         {/* CTA section */}
         <section className='cta-section'>
-          <p className='text-[3vw]'>Start Your Learning Journey Today</p>
-          <p>Join our platform and access a widde range of courses and resources.</p>
+          <p className='text-[3vw] cta-animation-1'>Start Your Learning Journey Today</p>
+          <p className='cta-animation-1'>Join our platform and access a widde range of courses and resources.</p>
           <SignUpBtn />
         </section>
 
+        <AnimatedLine />
         {/* newsletter section */}
         <section className='newsletter-section'>
           <div className='text-[3vw] w-1/2'>Stay Updated with Our newsletter</div>
@@ -212,7 +231,7 @@ const Page = () => {
         </section>
       </main>
 
-      <footer>
+      <footer id='About'>
         <div className="flex items-center">
           <img src="\login-pg-imgs\logo.png" alt="Logo" className="h-8 w-auto" />
         </div>
