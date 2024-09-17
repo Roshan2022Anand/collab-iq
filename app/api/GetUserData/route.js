@@ -6,6 +6,8 @@ import Stats from '@/model/stats';
 export async function POST(request) {
     try {
         // Connect to the database
+        console.log("GetUserData API called");
+        
         await connectDB();
         const { tempUserEmail } = await request.json();        
         const user = await User.findOne({ email: tempUserEmail});

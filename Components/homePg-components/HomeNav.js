@@ -6,7 +6,6 @@ import { MyContext } from '../Mycontext';
 import { RiHome2Line } from "react-icons/ri";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
 const HomeNav = () => {
 
     const { newUser, router, userData, userStats } = useContext(MyContext)
@@ -16,10 +15,9 @@ const HomeNav = () => {
             <nav className={styles.nav}>
                 <p>CollabIQ</p>
                 <ul className='flex justify-evenly w-2/3'>
-                    <li className='flex items-center' onClick={() => { router.push('/mainPg/Home')}}><RiHome2Line />Home</li>
+                    <li className='flex items-center' onClick={() => { router.push('/mainPg/Home') }}><RiHome2Line />Home</li>
                     <li className='flex items-center'><IoMdNotificationsOutline />Notification</li>
-                    <li className='flex items-center'><IoSettingsOutline />Setting</li>
-                    <li className='flex items-center' onClick={() => { router.push('/mainPg/Profile') }}><CgProfile />Profile</li>
+                    <li className='flex items-center' onClick={() => { router.push('/mainPg/SettingOpt/Profile') }}><IoSettingsOutline />Setting</li>
                 </ul>
             </nav>
 

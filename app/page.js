@@ -5,10 +5,8 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SignUpBtn from '@/Components/signup-components/SignUpBtn'
 import AnimatedLine from '@/Components/AnimatedLine'
-import { MyContext } from '@/Components/Mycontext'
 import Nav from '@/Components/Nav'
 const Page = () => {
-
 
   //All gsap animation 
   gsap.registerPlugin(ScrollTrigger);
@@ -18,14 +16,15 @@ const Page = () => {
     let tbAnimation = {
       y: -30,
       opacity: 0,
-      duration: 0.5,
+      duration: 0.4,
       stagger: 0.3
     }
     let lrAnimation = {
       x: "-100%",
       opacity: 0,
-      duration: 0.5,
-      stagger: 0.5
+      duration: 0.4,
+      stagger: 0.3,
+      ease: "power.in"
     }
     const lrScrollTriggerAnimation = (cls) => {
       return {
@@ -96,7 +95,7 @@ const Page = () => {
       window.removeEventListener("wheel", moveNav);
     }
   }, [])
-  
+
   let arr = []
   for (let i = 0; i < 4; i++)
     arr.push('Together We Learn, Together We Grow.');
@@ -126,9 +125,11 @@ const Page = () => {
             <img src="/login-pg-imgs/bg-img.jpg" className='h-full w-full p-2 rounded-3xl' />
           </div>
         </section>
+
         <div className='marquee'>
           {arr.map((ele) => { return <p className='marquee-ele -translate-x-full'>{ele}</p> })}
         </div>
+
         <AnimatedLine />
         {/* features section */}
         <section id='Features' className='sub-section p-2 max-w-[1400px] mx-auto max-h-[700px]'>
@@ -175,7 +176,6 @@ const Page = () => {
             </article>
           </div>
         </section>
-
 
         <AnimatedLine />
         {/* how its work section */}
@@ -232,7 +232,7 @@ const Page = () => {
         </section>
       </main>
 
-      <footer id='About'>
+      <footer id='About' className='w-screen h-screen'>
         <div className="flex items-center">
           <img src="\login-pg-imgs\logo.png" alt="Logo" className="h-8 w-auto" />
         </div>

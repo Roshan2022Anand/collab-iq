@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <SessionWrapper>
         <MyContext>
-          <body className={poppins.className}>{children}</body>
+          <body className={roboto.className} suppressHydrationWarning>{children}</body>
         </MyContext>
       </SessionWrapper>
     </html>

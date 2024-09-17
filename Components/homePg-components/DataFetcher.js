@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const DataFetcher = () => {
 
-    const {setUserData,setUserStats,userData,userEmail,setuserEmail} = useContext(MyContext)
+    const { setUserData, setUserStats, userData, userEmail, setuserEmail } = useContext(MyContext)
     //get user data from DB
     useEffect(() => {
         //fetching the email useign session if the the client did'nt got the data
@@ -18,8 +18,6 @@ const DataFetcher = () => {
 
         //fetching the user data from the DB
         const getUserData = async () => {
-            console.log("fething the data");
-            
             let tempUserEmail = userEmail;
             try {
                 //if the email is not fetched then fetch it
@@ -37,7 +35,7 @@ const DataFetcher = () => {
     }, [])
 
     //showing loader if the data is not fetched
-    if (userData == null) return <Loader/>
+    if (userData == null) return <Loader />
     return null
 }
 

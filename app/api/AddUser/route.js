@@ -11,9 +11,6 @@ export async function POST(request) {
         await connectDB();
 
         const { userName, userAge, userQualification, userField, userEmail } = await request.json();
-        if (userEmail) {
-            return NextResponse.json({ message: 'Email already exists. Please use a different email.' });
-        }
         //adding user basic details to DB
         const newUser = new User({
             name: userName,

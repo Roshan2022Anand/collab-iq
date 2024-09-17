@@ -13,7 +13,7 @@ const page = () => {
     const handleSubmit = async () => {
         try {
             const res = await axios.post("/api/AddUser", { userName, userAge, userQualification, userField, userEmail })
-            console.log(res.data)
+            console.log(res.data);
             router.push("/mainPg/Home")
         } catch (error) {
             console.log(error)
