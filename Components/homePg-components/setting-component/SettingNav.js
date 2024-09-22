@@ -7,7 +7,8 @@ const SideBar = () => {
   return (
     <aside className='w-1/4 border-2 flex flex-col items-center'>
       <div onClick={() => { router.push('/mainPg/SettingOpt/Profile') }}>Profile</div>
-      <div onClick={() => { router.push('/mainPg/SettingOpt/DeleteAc') }}>Delete Account</div>
+      <div onClick={() => { router.push('/mainPg/SettingOpt/DeleteAc') }}>Sign Out</div>
+      <div onClick={() => { router.push('/mainPg/SettingOpt/Preference') }}>Preference</div>
     </aside>
   )
 }

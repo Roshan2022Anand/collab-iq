@@ -1,0 +1,20 @@
+.receiver,
+.sender,
+.updates {
+    width: fit-content;
+    padding: 5px 15px;
+}
+
+.receiver {
+    border-radius: 10px;
+    background-color: #a9a7a1;
+    border-bottom-left-radius: 0;
+    margin-left: 10px;
+}
+
+.sender {
+    border-radius: 10px;
+    background-color: #e2814c;
+    border-bottom-right-radius: 0;
+    margin: 0 10px 0 auto;
+}

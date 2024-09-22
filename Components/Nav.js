@@ -7,28 +7,7 @@ import { TiThMenu } from "react-icons/ti";
 import { ImCross } from "react-icons/im";
 import gsap from 'gsap';
 const Nav = () => {
-    const { isDarkMode, setIsDarkMode, isMobileScreen } = useContext(MyContext);
-    const [isMounted, setisMounted] = useState(null)
-    //function to toggle dark mode
-    const toggleDarkMode = () => {
-        setIsDarkMode(!isDarkMode)
-        if (isDarkMode) {
-            document.documentElement.style.setProperty('--bg-color', '#1E1E1E');
-            document.documentElement.style.setProperty('--highlight-color', '#FF6F20');
-            document.documentElement.style.setProperty('--text-color', '#F5F5F5');
-            document.documentElement.style.setProperty('--hover-color', '#FFA500');
-            document.documentElement.style.setProperty('--secondary-bg-color', '#4A4A4A');
-            document.documentElement.style.setProperty('--opacity-bg-color', 'rgba(30, 30, 30, 0.6)');
-        }
-        else {
-            document.documentElement.style.setProperty('--bg-color', '#FFFFFF');
-            document.documentElement.style.setProperty('--highlight-color', '#FF6F20');
-            document.documentElement.style.setProperty('--text-color', '#333333');
-            document.documentElement.style.setProperty('--hover-color', '#FFF3E0');
-            document.documentElement.style.setProperty('--secondary-bg-color', '#7D7D7D');
-            document.documentElement.style.setProperty('--opacity-bg-color', 'rgba(255, 255, 255, 0.3)');
-        }
-    }
+    const { isDarkMode, setIsDarkMode, isMobileScreen,toggleDarkMode } = useContext(MyContext);
 
     //function to open the nav bar
     let navTlRef;

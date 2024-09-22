@@ -5,7 +5,7 @@ import { MyContext } from '../Mycontext';
 //importing react icons
 import { RiHome2Line } from "react-icons/ri";
 import { IoSettingsOutline } from "react-icons/io5";
-import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
 const HomeNav = () => {
 
     const { newUser, router, userData, userStats } = useContext(MyContext)
@@ -16,7 +16,7 @@ const HomeNav = () => {
                 <p>CollabIQ</p>
                 <ul className='flex justify-evenly w-2/3'>
                     <li className='flex items-center' onClick={() => { router.push('/mainPg/Home') }}><RiHome2Line />Home</li>
-                    <li className='flex items-center'><IoMdNotificationsOutline />Notification</li>
+                    <li className='flex items-center' onClick={() => { router.push('/mainPg/ChatPg') }}><IoChatboxEllipsesOutline />Chats</li>
                     <li className='flex items-center' onClick={() => { router.push('/mainPg/SettingOpt/Profile') }}><IoSettingsOutline />Setting</li>
                 </ul>
             </nav>

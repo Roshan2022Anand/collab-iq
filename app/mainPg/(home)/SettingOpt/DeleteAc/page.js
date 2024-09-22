@@ -28,7 +28,17 @@ const page = () => {
         }
     }
     return (
-        <div>Delete user</div>
+        <section>
+            <div className="flex flex-col items-center">
+                <h1 className="text-2xl font-bold">Sign out</h1>
+                <button onClick={handleSignOut} className="bg-red-500 text-white px-4 py-2 mt-4">Sign Out</button>
+            </div>
+            <div className="flex flex-col items-center">
+                <h1 className="text-2xl font-bold">Delete Account</h1>
+                <p className="text-center">Are you sure you want to delete your account?</p>
+                <button onClick={handleDeleteAccount} className="bg-red-500 text-white px-4 py-2 mt-4">Delete Account</button>
+            </div>
+        </section>
     )
 }
 

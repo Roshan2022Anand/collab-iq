@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* boilerPlate */
+*,*::before,*::after{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+html,
+body {
+  color-scheme: dark light;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+img,picture,svg,video{
+  display: block;
+  max-width: 100%;
+}
+
 :root {
   --primary-font: "Poppins", sans-serif;
   /** main body font*/
@@ -39,18 +61,6 @@
 }
 
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-weight: 600;
-  scroll-behavior: smooth;
-}
 
 .nav {
   width: 100%;
