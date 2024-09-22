@@ -11,7 +11,6 @@ const Mycontext = ({children}) => {
   const [userEmail, setuserEmail] = useState(null);
   const [userData, setUserData] = useState(null)
   const [userStats, setUserStats] = useState(null)
-  const isMobileScreen = useMediaQuery({ query: '(max-width:600px)' });
   //function to toggle dark mode
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode)
@@ -33,7 +32,7 @@ const Mycontext = ({children}) => {
     }
   }
   return (
-    <MyContext.Provider value={{ newUser, setNewUser, isDarkMode, setIsDarkMode, userEmail, setuserEmail,router,isMobileScreen,userData,setUserData,userStats,setUserStats,toggleDarkMode }}>
+    <MyContext.Provider value={{ newUser, setNewUser, isDarkMode, setIsDarkMode, userEmail, setuserEmail,router,userData,setUserData,userStats,setUserStats,toggleDarkMode }}>
         {children}
     </MyContext.Provider>
   )

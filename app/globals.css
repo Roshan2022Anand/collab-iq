@@ -76,30 +76,6 @@ img,picture,svg,video{
   z-index: 100;
 }
 
-.mobile-nav {
-  width: 40vw;
-  background-color: #4a4a4ade;
-  backdrop-filter: blur(20px);
-  padding: 10px 30px;
-  border-bottom-left-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  position: fixed;
-  top: 0;
-  right: -50%;
-  z-index: 100;
-  font-size: 5vw;
-  opacity: 0;
-}
-.mobile-nav a {
-  text-align: center;
-
-  &:hover {
-    color: var(--highlight-color);
-  }
-}
-
 button {
   border-radius: 5px;
   padding: 2px;
