@@ -14,7 +14,7 @@ const Nav = () => {
             <div className="flex items-center ">
                 <img src="\login-pg-imgs\logo.png" alt="Logo" className="nav-animation-1 h-8 w-auto " />
             </div>
-                <div className="nav-animation-2 flex items-center space-x-7">
+                <div className="nav-animation-2 nav-opt">
                     {['Features', 'Reviews', 'About'].map(ele => { return <a key={ele} href={`#${ele}`}>{ele}</a> })} {/* Added key prop */}
                     <SignUpBtn />
                     <button onClick={toggleDarkMode} className="px-3 py-1 rounded-full hover:border-0 hover:brightness-150" style={{
