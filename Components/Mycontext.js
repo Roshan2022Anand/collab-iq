@@ -32,7 +32,7 @@ const Mycontext = ({children}) => {
     }
   }
   return (
-    <MyContext.Provider value={{ newUser, setNewUser, isDarkMode, setIsDarkMode, userEmail, setuserEmail,router,userData,setUserData,userStats,setUserStats,toggleDarkMode }}>
+    <MyContext.Provider value={{ newUser, setNewUser, isDarkMode, setIsDarkMode, userEmail, setuserEmail,router,userData,setUserData,userStats,setUserStats,toggleDarkMode}}>
         {children}
     </MyContext.Provider>
   )
