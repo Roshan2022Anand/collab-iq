@@ -8,6 +8,9 @@ import AnimatedLine from '@/Components/AnimatedLine'
 import Nav from '@/Components/Nav'
 const Page = () => {
 
+//an array containing 10 fruits name
+  const fruits = ['Apple', 'Banana', 'Mango', 'Orange', 'Pineapple', 'Grapes', 'Watermelon', 'Papaya', 'Guava', 'Kiwi']
+
   //All gsap animation 
   gsap.registerPlugin(ScrollTrigger);
   useGSAP(() => {

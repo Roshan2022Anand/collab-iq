@@ -1,89 +1,86 @@
 "use client"
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import io from 'socket.io-client';
-import styles from './chat.module.css'
-import { getSession } from 'next-auth/react';
-import axios from 'axios';
-import ChatBoxPersonal from '@/Components/homePg-components/Chat-components/ChatBoxPersonal';
-import ChatBoxBtn from '@/Components/homePg-components/Chat-components/ChatBoxBtn';
+import React, { useEffect, useState, useRef, useContext } from 'react'
+import { io } from 'socket.io-client'
+import styles from "./chat.module.css"
+import { Minus, Plus, } from 'lucide-react'
+import { MyContext } from '@/Components/Mycontext'
+import { getSession } from 'next-auth/react'
+import axios from 'axios'
+import UserChatBtn from '@/Components/homePg-components/Chat-components/UserChatBtn'
+import UserChatBox from '@/Components/homePg-components/Chat-components/UserChatBox'
 const page = () => {
-  const session = getSession();
-  const [allMsgs, setallMsgs] = useState([]);
-  const [socket, setSocket] = useState(null);
-  const [chatBoxConatinerBtns, setcheckBoxContainerBtns] = useState([]);
-  const [chatBoxConatinerMsgs, setchatBoxConatinerMsgs] = useState([]);
-  const [chattingBox, setchattingBox] = useState(null);
-  const [srchInput, setsrchInput] = useState('');
-  const [allUserReference, setallUserReference] = useState([]);
-  const [chatNum, setchatNum] = useState(null);
-
-  //to connect to the socket
+  const { userEmail, setuserEmail } = useContext(MyContext);
+  const [allUsersEmail, setallUsersEmail] = useState([]);
+  // all the states
+  const [addUserBar, setaddUserBar] = useState(false);
+  const [usersChatBtn, setusersChatBtn] = useState([]);
+  const [currentChatBox, setcurrentChatBox] = useState(null);
+  const [socket, setsocket] = useState();
+  // all the refs
+  const addUserInput = useRef(null);
+  //fetching email from the session and connecting the socket
   useEffect(() => {
-    let socketIo;
-    // Create a new WebSocket connection
-    if (session) {
-      socketIo = io('http://localhost:9000', {
-        auth: {
-          token: session.token  // Send the token or session data with the connection
-        },
-        withCredentials: true, // Include credentials in the WebSocket connection
-      });
-    }
-    setSocket(socketIo);
-    // Clean up the socket connection on component unmount
-    return () => {
-      socketIo.off('return-msg');
-      socketIo.disconnect();
-    };
-  }, []);
-  
-  //to get all the usersfrom the database
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await axios.get('/api/GetAllNameNEmail');
-        setallUserReference(res.data.userData)
-      } catch (err) {
-        setsrchInput('error while searching')
+    const socketIo = io('http://localhost:9000')
+    console.log(socketIo);
+    const conncetSocket = async () => {
+      const session = await getSession();
+      if (session) {
+        let tempEmail = session.user.email;
+        setuserEmail(tempEmail);
+        socketIo.on('connect', () => {
+          socketIo.emit('user-connected', tempEmail)
+          setsocket(socketIo);
+          console.log(socketIo);
+        })
+      }else{
+        console.log("no session found");
       }
     }
-    fetchUsers();
-  }, []);
-
-  //function to add chats
-  const addChats = async () => {
-    let user = allUserReference.filter((user) => user.name === srchInput);
-    if (user.length === 0) {
-      setsrchInput('User not found..');
-    } else {
-      setsrchInput('Yup he is there..');
-      setcheckBoxContainerBtns([...chatBoxConatinerBtns, <ChatBoxBtn userEmail={user[0].email} userName={user[0].name} index={chatBoxConatinerBtns.length} setchatNum={setchatNum} />]);
-      setchatBoxConatinerMsgs([...chatBoxConatinerMsgs, <ChatBoxPersonal userEmail={user[0].email} userName={user[0].name} socket={socket} />]);
+    conncetSocket();
+    return () => {
+      socketIo.disconnect();
+      console.log("socket disconnected");
+      
     }
-  }
+  }, [])
 
-  //function to show selected chat box the chat box
+  //to get all the emails of the users
   useEffect(() => {
-    if (chatNum !== null) setchattingBox(chatBoxConatinerMsgs[chatNum]);
-  }, [chatNum]);
+    const getAllUsersEmails = async () => {
+      const res = await axios.get("/api/GetAllNameNEmail");
+      setallUsersEmail(res.data.userData);
+    }
+    getAllUsersEmails();
+  }, [])
 
+  //function to add new user chat box
+  const addNewUserChatBox = () => {
+    const newUserName = addUserInput.current.value;
+    allUsersEmail.forEach(userObj => {
+      if (userObj.name === newUserName) {
+        console.log("user found");
+        setusersChatBtn([...usersChatBtn, <UserChatBtn key={`chat-btn-${usersChatBtn.length}`} name={newUserName} email={userObj.email} index={usersChatBtn.length} setcurrentChatBox={setcurrentChatBox} chatBox={<UserChatBox userEmail={userEmail} name={newUserName} email={userObj.email} socket={socket}/>}/>]);
+      }
+    });
+  }
   return (
-    <main className='h-[75vh] border-2 my-11 flex'>
-      <section className='border-2 w-1/3 flex flex-col '>
-        <div className='flex p-2 gap-1'>
-          <input type='text'
-            className='bg-white text-black border-2 rounded-2xl p-1 grow' placeholder='search'
-            value={srchInput}
-            onChange={(e) => { setsrchInput(e.target.value) }} />
-          <button className='bg-red-400 text-white w-1/4' onClick={addChats}>Add</button>
-        </div>
-        <div className='border-2 flex flex-col'>
-          {chatBoxConatinerBtns}
-        </div>
-      </section>
-      {/* chat section */}
-      <section className='bg-gray-700 grow flex flex-col'>
-        {chattingBox}
+    <main>
+      <nav className="flex justify-end items-center h-[8vh] bg-red-500">
+        {addUserBar
+          ? <div className="flex">
+            <input type="text" placeholder="search user" ref={addUserInput} className="rounded-3xl p-1 px-2 h-2/3 border-2 bg-transparent" />
+            <button onClick={addNewUserChatBox}>Add</button>
+          </div>
+          : null}
+        <button onClick={() => { setaddUserBar(!addUserBar) }}>
+          {addUserBar ? <Minus /> : <Plus />}</button>
+      </nav>
+      <section className={styles.container}>
+
+        <aside className={styles.aside}>{usersChatBtn}</aside>
+        <section className="border-2 border-red-600 w-[75%] flex flex-col">
+          {currentChatBox}
+        </section>
       </section>
     </main>
   )

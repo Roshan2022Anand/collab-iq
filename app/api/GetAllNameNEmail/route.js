@@ -13,7 +13,6 @@ export async function GET() {
             name: user.name,
             email: user.email
         }));        
-        console.log(userData);
         return NextResponse.json({userData}, { status: 200 });
     } catch (error) {
         console.log("error in GetAllUsers");

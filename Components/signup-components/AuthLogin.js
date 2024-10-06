@@ -28,7 +28,7 @@ export default function Component() {
                 setShowNewUserModal(true)
             }
         } catch (error) {
-            console.log("error occured")
+            console.log("error occured",error)
         }
 
     }

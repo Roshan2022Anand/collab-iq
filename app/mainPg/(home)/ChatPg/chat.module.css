@@ -1,3 +1,14 @@
+.container {
+    background-color: rgba(138, 133, 133, 0.76);
+    height: 75vh;
+    display: flex;
+}
+
+.aside {
+    flex-grow: 1;
+    background-color: rgba(168, 136, 136, 0.76);
+}
+
 .receiver,
 .sender,
 .updates {
@@ -5,9 +16,9 @@
     padding: 5px 15px;
 }
 
-.receiver {
+.reciever {
     border-radius: 10px;
-    background-color: #a9a7a1;
+    background-color: #a49b80;
     border-bottom-left-radius: 0;
     margin-left: 10px;
 }
