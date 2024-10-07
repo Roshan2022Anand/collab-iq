@@ -1,14 +1,14 @@
-import { ArrowBigLeft,  Send } from 'lucide-react'
-import React, { useRef,useEffect,useState } from 'react'
+import { ArrowBigLeft, Send } from 'lucide-react'
+import React, { useRef, useEffect, useState } from 'react'
 import styles from "@/app/mainPg/(home)/ChatPg/chat.module.css"
 const UserChatBox = ({ userEmail, name, email, socket }) => {
 
     //all states are defined here
     const [allMsgs, setallMsgs] = useState([])
+console.log(allMsgs);
 
     //ref for the message input
     const msgInput = useRef(null);
-    console.log(socket);
 
     //function to send the message
     const sendMsg = () => {
@@ -16,12 +16,11 @@ const UserChatBox = ({ userEmail, name, email, socket }) => {
         if (msg != "" && socket) {
             console.log("sending msg to backend");
             socket.emit('send-msg', { from: userEmail, to: email, msg: msg });
-            setallMsgs([...allMsgs, {msg,client:"sender"}]);
+            setallMsgs([...allMsgs, { msg, client: "sender" }]);
             msgInput.current.value = "";
         } else {
             console.log("message :", msg);
             console.log("socket :", socket);
-
         }
     }
 
@@ -30,15 +29,14 @@ const UserChatBox = ({ userEmail, name, email, socket }) => {
         if (socket) {
             socket.on('recieve-msg', ({ from, msg }) => {
                 if (from === email) {
-                    console.log("recieved msg from backend");
-                    setallMsgs([...allMsgs, {msg,client:"reciever"}]);
-                    console.log(from, msg);
-                } else {
-                    console.log("this is not for me", from,userEmail);
+                    console.log(allMsgs);
+                    setallMsgs((prevMsgs) => [...prevMsgs, { msg, client: "reciever" }]);
                 }
             })
         }
-
+        return () => {
+            if (socket) socket.off('recieve-msg');
+        }
     }, [])
 
 

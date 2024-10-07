@@ -16,33 +16,44 @@ const page = () => {
   const [usersChatBtn, setusersChatBtn] = useState([]);
   const [currentChatBox, setcurrentChatBox] = useState(null);
   const [socket, setsocket] = useState();
+
   // all the refs
   const addUserInput = useRef(null);
-  //fetching email from the session and connecting the socket
+
+  //to connect to the socket
   useEffect(() => {
-    const socketIo = io('http://localhost:9000')
-    console.log(socketIo);
-    const conncetSocket = async () => {
+    const socketIo = io('http://localhost:9000');
+    const connectSocket = async () => {
       const session = await getSession();
       if (session) {
-        let tempEmail = session.user.email;
+        const tempEmail = session.user.email;
         setuserEmail(tempEmail);
+        setsocket(socketIo);
+
         socketIo.on('connect', () => {
-          socketIo.emit('user-connected', tempEmail)
-          setsocket(socketIo);
-          console.log(socketIo);
-        })
-      }else{
-        console.log("no session found");
+          console.log("socket connected");
+          socketIo.emit('user-connected', tempEmail);
+        });
+
+        socketIo.on('disconnect', () => {
+          console.log("socket disconnected");
+        });
       }
-    }
-    conncetSocket();
+    };
+
+    connectSocket();
+
+    // Cleanup function to disconnect and remove event listeners when the component unmounts
     return () => {
+      socketIo.off('connect');
+      socketIo.off('disconnect');
       socketIo.disconnect();
       console.log("socket disconnected");
-      
-    }
-  }, [])
+    };
+  }, []);
+
+
+  
 
   //to get all the emails of the users
   useEffect(() => {
