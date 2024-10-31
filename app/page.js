@@ -1,14 +1,13 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import SignUpBtn from '@/Components/signup-components/SignUpBtn'
 import AnimatedLine from '@/Components/AnimatedLine'
 import Nav from '@/Components/Nav'
 const Page = () => {
 
-//an array containing 10 fruits name
+  //an array containing 10 fruits name
   const fruits = ['Apple', 'Banana', 'Mango', 'Orange', 'Pineapple', 'Grapes', 'Watermelon', 'Papaya', 'Guava', 'Kiwi']
 
   //All gsap animation 
@@ -130,7 +129,7 @@ const Page = () => {
         </section>
 
         <div className='marquee'>
-          {arr.map((ele) => { return <p className='marquee-ele -translate-x-full'>{ele}</p> })}
+          {arr.map((ele, index) => { return <p className='marquee-ele -translate-x-full' key={`marq-${index}`}>{ele}</p> })}
         </div>
 
         <AnimatedLine />
@@ -217,7 +216,9 @@ const Page = () => {
         <section className='cta-section'>
           <p className='text-[3vw] cta-animation-1'>Start Your Learning Journey Today</p>
           <p className='cta-animation-1'>Join our platform and access a widde range of courses and resources.</p>
-          <SignUpBtn />
+          <div>
+            <button className='cta-animation-1 btn-style-one'>Sign Up</button>
+          </div>
         </section>
 
         <AnimatedLine />
